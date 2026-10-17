@@ -1,5 +1,13 @@
 export const ALL_CATEGORIES = 'todas'
 
+// Cor de sinal de cada categoria: usada na etiqueta do card e nas ilustrações.
+export const CATEGORY_COLORS = {
+  Atendimento: '#3FD6C6',
+  Marketing: '#FF7A9A',
+  Desenvolvimento: '#FFB547',
+  Dados: '#6FA8FF',
+}
+
 export const SORT_OPTIONS = [
   { value: 'name', label: 'Nome (A–Z)' },
   { value: 'price-asc', label: 'Menor preço' },
