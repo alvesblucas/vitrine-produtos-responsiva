@@ -1,0 +1,28 @@
+:root {
+  --color-text: #1f2328;
+  --color-bg: #ffffff;
+  --font-base: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font-family: var(--font-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  padding: 1rem;
+}
+
+.app__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
