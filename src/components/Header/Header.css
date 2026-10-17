@@ -62,7 +62,30 @@
 }
 
 .header__cart-count {
+  display: inline-block;
   color: var(--color-accent-text);
+}
+
+.header__cart-count--bump {
+  animation: header-cart-bump 0.6s ease-out;
+}
+
+@keyframes header-cart-bump {
+  0% {
+    transform: scale(1.6);
+    text-shadow: 0 0 0.75rem var(--color-accent);
+  }
+
+  100% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__cart-count--bump {
+    animation: none;
+  }
 }
 
 /* No celular, "Carrinho:" some da tela (cabe tudo numa linha), mas o leitor de tela continua lendo. */

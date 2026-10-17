@@ -276,6 +276,23 @@
   background: var(--color-accent-hover);
 }
 
+/* Confirmação: o botão assume a cor da categoria e dá um "pop" de luz. */
+.product-card__button--added,
+.product-card__button--added:hover {
+  background: var(--agent-color);
+  animation: product-card-added 0.5s ease-out;
+}
+
+@keyframes product-card-added {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--agent-color) 70%, transparent);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0.75rem transparent;
+  }
+}
+
 .product-card__button-icon {
   flex: none;
   width: 1.125rem;
@@ -302,7 +319,8 @@
   }
 
   .product-card:hover .product-card__media::before,
-  .product-card:hover .product-card__media::after {
+  .product-card:hover .product-card__media::after,
+  .product-card__button--added {
     animation: none;
   }
 }
