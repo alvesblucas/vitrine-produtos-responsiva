@@ -1,3 +1,10 @@
+/*
+ * Breakpoints (mobile-first; CSS não aceita variável dentro de @media):
+ *   640px  → tablet:  2 colunas
+ *   1024px → desktop: 3 colunas
+ *   1280px → telas largas: 4 colunas
+ */
+
 :root {
   --color-text: #1f2328;
   --color-text-muted: #57606a;
@@ -23,6 +30,8 @@ body {
 }
 
 .app {
+  max-width: 80rem;
+  margin: 0 auto;
   padding: 1rem;
 }
 
@@ -32,10 +41,33 @@ body {
 }
 
 .app__list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+@media (min-width: 640px) {
+  .app {
+    padding: 1.5rem;
+  }
+
+  .app__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .app__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
