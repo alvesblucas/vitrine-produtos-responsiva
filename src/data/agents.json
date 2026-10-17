@@ -1,0 +1,66 @@
+[
+  {
+    "id": "suporte-ao-cliente",
+    "name": "Agente de Suporte ao Cliente",
+    "category": "Atendimento",
+    "specialty": "Responde dúvidas frequentes e encaminha casos complexos para a equipe.",
+    "priceInCents": 118800,
+    "color": "#1f5f8b"
+  },
+  {
+    "id": "agendamentos",
+    "name": "Agente de Agendamentos",
+    "category": "Atendimento",
+    "specialty": "Marca, remarca e confirma horários conversando com os clientes.",
+    "priceInCents": 89900,
+    "color": "#2b6a7c"
+  },
+  {
+    "id": "redator-de-conteudo",
+    "name": "Redator de Conteúdo",
+    "category": "Marketing",
+    "specialty": "Escreve rascunhos de posts, e-mails e descrições de produto.",
+    "priceInCents": 142800,
+    "color": "#8a3b5c"
+  },
+  {
+    "id": "analista-de-redes-sociais",
+    "name": "Analista de Redes Sociais",
+    "category": "Marketing",
+    "specialty": "Sugere calendário de publicações e resume o desempenho das postagens.",
+    "priceInCents": 129900,
+    "color": "#7a3e9d"
+  },
+  {
+    "id": "revisor-de-codigo",
+    "name": "Revisor de Código",
+    "category": "Desenvolvimento",
+    "specialty": "Aponta erros, riscos e melhorias de legibilidade em pull requests.",
+    "priceInCents": 199900,
+    "color": "#2f6f4f"
+  },
+  {
+    "id": "gerador-de-testes",
+    "name": "Gerador de Testes",
+    "category": "Desenvolvimento",
+    "specialty": "Propõe casos de teste a partir do código e dos requisitos.",
+    "priceInCents": 169900,
+    "color": "#3d6b2a"
+  },
+  {
+    "id": "analista-de-planilhas",
+    "name": "Analista de Planilhas",
+    "category": "Dados",
+    "specialty": "Organiza planilhas, encontra inconsistências e monta fórmulas.",
+    "priceInCents": 99900,
+    "color": "#8a4b14"
+  },
+  {
+    "id": "gerador-de-relatorios",
+    "name": "Gerador de Relatórios",
+    "category": "Dados",
+    "specialty": "Transforma dados brutos em relatórios resumidos e fáceis de ler.",
+    "priceInCents": 154800,
+    "color": "#6b4a2b"
+  }
+]
