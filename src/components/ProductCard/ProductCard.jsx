@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { formatPrice, getInstallmentInCents, INSTALLMENTS } from '../../utils/formatPrice.js'
 import { CATEGORY_COLORS } from '../../utils/catalog.js'
+import { useRevealOnScroll } from '../../hooks/useRevealOnScroll.js'
 import QuantitySelector from '../QuantitySelector/QuantitySelector.jsx'
 import './ProductCard.css'
 
@@ -14,9 +15,19 @@ function CartIcon() {
   )
 }
 
-function ProductCard({ agent, onAddToCart }) {
+// Escreve a posição do ponteiro direto em variáveis CSS: sem useState, o React não
+// re-renderiza o card a cada movimento do mouse.
+function handlePointerMove(event) {
+  const card = event.currentTarget
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--spot-x', `${event.clientX - rect.left}px`)
+  card.style.setProperty('--spot-y', `${event.clientY - rect.top}px`)
+}
+
+function ProductCard({ agent, onAddToCart, index }) {
   const { id, name, category, specialty, priceInCents } = agent
   const [quantity, setQuantity] = useState(1)
+  const [revealRef, isVisible] = useRevealOnScroll()
 
   function handleAddToCart() {
     onAddToCart(id, quantity)
@@ -25,7 +36,16 @@ function ProductCard({ agent, onAddToCart }) {
 
   return (
     // A cor da categoria vira variável CSS e colore etiqueta, borda e brilho do card.
-    <article className="product-card" style={{ '--agent-color': CATEGORY_COLORS[category] }}>
+    // O atraso em cascata reinicia a cada 4 cards (uma linha no desktop).
+    <article
+      ref={revealRef}
+      className={`product-card${isVisible ? ' product-card--visible' : ''}`}
+      style={{
+        '--agent-color': CATEGORY_COLORS[category],
+        '--reveal-delay': `${(index % 4) * 80}ms`,
+      }}
+      onPointerMove={handlePointerMove}
+    >
       <div className="product-card__media">
         {/* alt vazio: a ilustração repete o nome que vem logo abaixo, então é decorativa. */}
         <img

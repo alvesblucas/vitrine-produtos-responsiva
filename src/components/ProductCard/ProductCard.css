@@ -1,4 +1,12 @@
+/*
+ * Entrada ao rolar usa a propriedade `translate`; o hover usa `transform`.
+ * Por serem propriedades separadas, uma não sobrescreve a outra.
+ */
 .product-card {
+  --spot-x: 50%;
+  --spot-y: 0%;
+
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -6,7 +14,20 @@
   border-radius: var(--radius);
   background: var(--color-surface);
   overflow: hidden;
+  opacity: 0;
+  translate: 0 1.5rem;
   transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.product-card--visible {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.6s ease var(--reveal-delay),
+    translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay),
     border-color 0.2s ease,
     box-shadow 0.2s ease,
     transform 0.2s ease;
@@ -15,7 +36,7 @@
 /* focus-within: o card também "acende" quando um controle dentro dele recebe foco. */
 .product-card:hover,
 .product-card:focus-within {
-  border-color: color-mix(in srgb, var(--agent-color) 55%, transparent);
+  border-color: color-mix(in srgb, var(--agent-color) 35%, transparent);
   box-shadow: 0 0 2rem -0.5rem color-mix(in srgb, var(--agent-color) 45%, transparent);
 }
 
@@ -23,10 +44,91 @@
   transform: translateY(-3px);
 }
 
+/* Foco de luz que segue o ponteiro, por trás do texto (o corpo fica com z-index 1). */
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    16rem circle at var(--spot-x) var(--spot-y),
+    color-mix(in srgb, var(--agent-color) 16%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Borda que acende só onde a luz está: a máscara recorta tudo menos 1px de contorno. */
+.product-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    12rem circle at var(--spot-x) var(--spot-y),
+    var(--agent-color),
+    transparent 70%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.product-card:hover::before,
+.product-card:hover::after,
+.product-card:focus-within::before,
+.product-card:focus-within::after {
+  opacity: 1;
+}
+
 .product-card__media {
   position: relative;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-plate);
+  overflow: hidden;
+}
+
+/* Linha de varredura que atravessa a ilustração uma vez ao entrar com o mouse. */
+.product-card__media::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: 1;
+  height: 35%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--agent-color) 30%, transparent) 85%,
+    color-mix(in srgb, var(--agent-color) 80%, transparent) 100%
+  );
+  opacity: 0;
+  translate: 0 -100%;
+  pointer-events: none;
+}
+
+.product-card:hover .product-card__media::before {
+  animation: product-card-scan 1.1s ease-out 1;
+}
+
+@keyframes product-card-scan {
+  0% {
+    opacity: 1;
+    translate: 0 -100%;
+  }
+
+  100% {
+    opacity: 0;
+    translate: 0 290%;
+  }
 }
 
 /* Anel que pulsa em volta do núcleo da ilustração no hover. */
@@ -69,6 +171,8 @@
 }
 
 .product-card__body {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -183,9 +287,13 @@
   stroke-linejoin: round;
 }
 
+/* Menos movimento: card já aparece pronto, sem subir, pulsar ou varrer. O foco de luz fica. */
 @media (prefers-reduced-motion: reduce) {
   .product-card,
+  .product-card--visible,
   .product-card__button {
+    opacity: 1;
+    translate: none;
     transition: none;
   }
 
@@ -193,6 +301,7 @@
     transform: none;
   }
 
+  .product-card:hover .product-card__media::before,
   .product-card:hover .product-card__media::after {
     animation: none;
   }

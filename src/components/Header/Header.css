@@ -6,6 +6,15 @@
   border-bottom: 1px solid var(--color-border);
   background: rgb(14 18 48 / 0.78);
   backdrop-filter: blur(12px);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Fora do topo, a borda inferior acende para separar o header do conteúdo que passa por trás. */
+.header--scrolled {
+  border-bottom-color: rgb(142 125 255 / 0.45);
+  box-shadow: 0 0.5rem 2rem -1rem rgb(142 125 255 / 0.5);
 }
 
 .header__inner {

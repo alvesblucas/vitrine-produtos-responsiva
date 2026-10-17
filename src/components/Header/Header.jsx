@@ -1,10 +1,22 @@
+import { useEffect, useState } from 'react'
 import './Header.css'
 
 function Header({ cartCount }) {
   const licenseLabel = cartCount === 1 ? 'licença' : 'licenças'
+  const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 8)
+
+  useEffect(() => {
+    // passive: avisa o navegador que não vamos bloquear a rolagem, que continua fluida.
+    // O React ignora o setState quando o valor não muda, então não re-renderiza a cada pixel.
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 8)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="header">
+    <header className={`header${isScrolled ? ' header--scrolled' : ''}`}>
       <div className="header__inner">
         {/* O h1 da página fica na abertura; aqui o nome da loja é o logotipo. */}
         <p className="header__logo">
