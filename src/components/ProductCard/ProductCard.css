@@ -1,0 +1,61 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+/* aspect-ratio reserva o espaço da imagem e evita o layout "pular". */
+.product-card__image {
+  aspect-ratio: 4 / 3;
+}
+
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+}
+
+.product-card__category {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.product-card__name {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.product-card__specialty {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.product-card__license {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.product-card__price {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.product-card__installments {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
