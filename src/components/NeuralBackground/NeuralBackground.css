@@ -7,3 +7,67 @@
   height: 100%;
   pointer-events: none;
 }
+
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/*
+ * radial-gradient em vez de filter: blur(): o desfoque já vem "pintado" no gradiente,
+ * então o navegador só move a camada (transform), sem recalcular blur a cada quadro.
+ */
+.aurora__blob {
+  position: absolute;
+  width: 55vmax;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0.22;
+  animation: aurora-drift 32s ease-in-out infinite alternate;
+}
+
+.aurora__blob--a {
+  top: -20vmax;
+  left: -15vmax;
+  background: radial-gradient(circle, #8e7dff 0, transparent 65%);
+}
+
+.aurora__blob--b {
+  top: 20vh;
+  right: -20vmax;
+  background: radial-gradient(circle, #3fd6c6 0, transparent 65%);
+  animation-duration: 38s;
+  animation-delay: -12s;
+}
+
+.aurora__blob--c {
+  bottom: -25vmax;
+  left: 20vw;
+  background: radial-gradient(circle, #ff7a9a 0, transparent 65%);
+  opacity: 0.14;
+  animation-duration: 44s;
+  animation-delay: -20s;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(8vmax, 6vmax) scale(1.12);
+  }
+
+  100% {
+    transform: translate(-6vmax, 10vmax) scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora__blob {
+    animation: none;
+  }
+}

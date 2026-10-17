@@ -27,7 +27,14 @@ function Header({ cartCount }) {
         <p className="header__cart" aria-live="polite">
           <span className="header__cart-dot" aria-hidden="true" />
           <span className="header__cart-label">Carrinho: </span>
-          <strong className="header__cart-count">{cartCount}</strong> {licenseLabel}
+          {/* key muda a cada adição: o React recria o elemento e a animação de "pulso" roda de novo. */}
+          <strong
+            key={cartCount}
+            className={`header__cart-count${cartCount > 0 ? ' header__cart-count--bump' : ''}`}
+          >
+            {cartCount}
+          </strong>{' '}
+          {licenseLabel}
         </p>
       </div>
     </header>

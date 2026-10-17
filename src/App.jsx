@@ -3,6 +3,7 @@ import agents from './data/agents.json'
 import { ALL_CATEGORIES, getCategories, getVisibleAgents } from './utils/catalog.js'
 import NeuralBackground from './components/NeuralBackground/NeuralBackground.jsx'
 import Header from './components/Header/Header.jsx'
+import DecodingText from './components/DecodingText/DecodingText.jsx'
 import CatalogToolbar from './components/CatalogToolbar/CatalogToolbar.jsx'
 import ProductCard from './components/ProductCard/ProductCard.jsx'
 
@@ -39,7 +40,7 @@ function App() {
         <section className="hero" aria-labelledby="hero-title">
           <p className="hero__eyebrow">Vitrine fictícia · projeto de portfólio</p>
           <h1 id="hero-title" className="hero__title">
-            Monte sua equipe de agentes
+            <DecodingText text="Monte sua equipe de agentes" />
           </h1>
           <p className="hero__text">
             Licenças anuais de agentes de IA especializados. Escolha o agente, defina quantas pessoas

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { formatPrice, getInstallmentInCents, INSTALLMENTS } from '../../utils/formatPrice.js'
 import { CATEGORY_COLORS } from '../../utils/catalog.js'
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll.js'
@@ -15,6 +15,16 @@ function CartIcon() {
   )
 }
 
+function CheckIcon() {
+  return (
+    <svg className="product-card__button-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </svg>
+  )
+}
+
+const ADDED_FEEDBACK_MS = 1500
+
 // Escreve a posição do ponteiro direto em variáveis CSS: sem useState, o React não
 // re-renderiza o card a cada movimento do mouse.
 function handlePointerMove(event) {
@@ -28,10 +38,18 @@ function ProductCard({ agent, onAddToCart, index }) {
   const { id, name, category, specialty, priceInCents } = agent
   const [quantity, setQuantity] = useState(1)
   const [revealRef, isVisible] = useRevealOnScroll()
+  const [justAdded, setJustAdded] = useState(false)
+  const feedbackTimer = useRef(0)
+
+  // Limpa o timer se o card sair da tela (ex.: trocou o filtro) antes de 1,5s.
+  useEffect(() => () => clearTimeout(feedbackTimer.current), [])
 
   function handleAddToCart() {
     onAddToCart(id, quantity)
     setQuantity(1)
+    setJustAdded(true)
+    clearTimeout(feedbackTimer.current)
+    feedbackTimer.current = setTimeout(() => setJustAdded(false), ADDED_FEEDBACK_MS)
   }
 
   return (
@@ -74,14 +92,15 @@ function ProductCard({ agent, onAddToCart, index }) {
         <div className="product-card__actions">
           <QuantitySelector value={quantity} onChange={setQuantity} itemName={name} />
           {/* aria-label diferencia os 8 botões no leitor de tela e começa com o texto visível. */}
+          {/* O nome acessível não muda: o novo total já é anunciado pelo contador do header. */}
           <button
             type="button"
-            className="product-card__button"
+            className={`product-card__button${justAdded ? ' product-card__button--added' : ''}`}
             onClick={handleAddToCart}
             aria-label={`Adicionar ao carrinho: ${name}`}
           >
-            <CartIcon />
-            Adicionar
+            {justAdded ? <CheckIcon /> : <CartIcon />}
+            {justAdded ? 'Adicionado' : 'Adicionar'}
           </button>
         </div>
       </div>

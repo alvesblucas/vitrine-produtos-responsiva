@@ -1,0 +1,18 @@
+.decoding-text__word {
+  position: relative;
+  display: inline-block;
+}
+
+/* opacity (e não visibility) mantém o texto real acessível ao leitor de tela. */
+.decoding-text__final--hidden {
+  opacity: 0;
+}
+
+/* Fica por cima da própria palavra, sem empurrar o layout. */
+.decoding-text__scramble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  color: var(--color-accent-text);
+}
