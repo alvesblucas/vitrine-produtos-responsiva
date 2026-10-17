@@ -33,6 +33,17 @@ function App() {
       <Header cartCount={cartCount} />
 
       <main id="conteudo" className="app">
+        <section className="hero" aria-labelledby="hero-title">
+          <p className="hero__eyebrow">Vitrine fictícia · projeto de portfólio</p>
+          <h1 id="hero-title" className="hero__title">
+            Monte sua equipe de agentes
+          </h1>
+          <p className="hero__text">
+            Licenças anuais de agentes de IA especializados. Escolha o agente, defina quantas pessoas
+            do seu time vão usar e adicione ao carrinho.
+          </p>
+        </section>
+
         <CatalogToolbar
           categories={categories}
           category={category}
