@@ -14,12 +14,8 @@ function ProductCard({ agent, onAddToCart }) {
 
   return (
     <article className="product-card">
-      <div
-        className="product-card__image"
-        style={{ backgroundColor: color }}
-        role="img"
-        aria-label={`Imagem ilustrativa: ${name}`}
-      />
+      {/* Placeholder decorativo: aria-hidden evita que o leitor de tela anuncie algo sem informação. */}
+      <div className="product-card__image" style={{ backgroundColor: color }} aria-hidden="true" />
 
       <div className="product-card__body">
         <p className="product-card__category">{category}</p>
@@ -34,7 +30,13 @@ function ProductCard({ agent, onAddToCart }) {
 
         <div className="product-card__actions">
           <QuantitySelector value={quantity} onChange={setQuantity} itemName={name} />
-          <button type="button" className="product-card__button" onClick={handleAddToCart}>
+          {/* aria-label diferencia os 8 botões no leitor de tela e começa com o texto visível. */}
+          <button
+            type="button"
+            className="product-card__button"
+            onClick={handleAddToCart}
+            aria-label={`Adicionar ao carrinho: ${name}`}
+          >
             Adicionar ao carrinho
           </button>
         </div>

@@ -26,9 +26,13 @@ function App() {
 
   return (
     <>
+      <a className="skip-link" href="#conteudo">
+        Pular para o conteúdo
+      </a>
+
       <Header cartCount={cartCount} />
 
-      <main className="app">
+      <main id="conteudo" className="app">
         <CatalogToolbar
           categories={categories}
           category={category}
