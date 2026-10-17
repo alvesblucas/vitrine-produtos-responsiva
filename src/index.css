@@ -1,6 +1,10 @@
 :root {
   --color-text: #1f2328;
-  --color-bg: #ffffff;
+  --color-text-muted: #57606a;
+  --color-bg: #f6f8fa;
+  --color-surface: #ffffff;
+  --color-border: #d0d7de;
+  --radius: 0.75rem;
   --font-base: system-ui, 'Segoe UI', Roboto, sans-serif;
 
   font-family: var(--font-base);
@@ -23,6 +27,15 @@ body {
 }
 
 .app__title {
-  margin: 0;
+  margin: 0 0 1rem;
   font-size: 1.5rem;
+}
+
+.app__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
