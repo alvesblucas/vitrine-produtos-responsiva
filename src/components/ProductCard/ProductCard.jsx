@@ -1,8 +1,16 @@
+import { useState } from 'react'
 import { formatPrice, getInstallmentInCents, INSTALLMENTS } from '../../utils/formatPrice.js'
+import QuantitySelector from '../QuantitySelector/QuantitySelector.jsx'
 import './ProductCard.css'
 
-function ProductCard({ agent }) {
-  const { name, category, specialty, priceInCents, color } = agent
+function ProductCard({ agent, onAddToCart }) {
+  const { id, name, category, specialty, priceInCents, color } = agent
+  const [quantity, setQuantity] = useState(1)
+
+  function handleAddToCart() {
+    onAddToCart(id, quantity)
+    setQuantity(1)
+  }
 
   return (
     <article className="product-card">
@@ -23,6 +31,13 @@ function ProductCard({ agent }) {
         <p className="product-card__installments">
           em até {INSTALLMENTS}x de {formatPrice(getInstallmentInCents(priceInCents))} sem juros
         </p>
+
+        <div className="product-card__actions">
+          <QuantitySelector value={quantity} onChange={setQuantity} itemName={name} />
+          <button type="button" className="product-card__button" onClick={handleAddToCart}>
+            Adicionar ao carrinho
+          </button>
+        </div>
       </div>
     </article>
   )

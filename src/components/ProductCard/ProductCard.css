@@ -14,6 +14,7 @@
 }
 
 .product-card__body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -58,4 +59,30 @@
   margin: 0;
   font-size: 0.875rem;
   color: var(--color-text-muted);
+}
+
+/* margin-top: auto empurra as ações para o rodapé, alinhando cards de alturas diferentes. */
+.product-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.product-card__button {
+  flex: 1 1 9rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-small);
+  background: var(--color-accent);
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-on-accent);
+  cursor: pointer;
+}
+
+.product-card__button:hover {
+  background: var(--color-accent-hover);
 }
