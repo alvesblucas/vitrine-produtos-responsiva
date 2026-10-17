@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import agents from './data/agents.json'
 import { ALL_CATEGORIES, getCategories, getVisibleAgents } from './utils/catalog.js'
+import NeuralBackground from './components/NeuralBackground/NeuralBackground.jsx'
 import Header from './components/Header/Header.jsx'
 import CatalogToolbar from './components/CatalogToolbar/CatalogToolbar.jsx'
 import ProductCard from './components/ProductCard/ProductCard.jsx'
@@ -26,6 +27,8 @@ function App() {
 
   return (
     <>
+      <NeuralBackground />
+
       <a className="skip-link" href="#conteudo">
         Pular para o conteúdo
       </a>
@@ -54,9 +57,9 @@ function App() {
         />
 
         <ul className="app__list">
-          {visibleAgents.map((agent) => (
+          {visibleAgents.map((agent, index) => (
             <li key={agent.id} className="app__item">
-              <ProductCard agent={agent} onAddToCart={handleAddToCart} />
+              <ProductCard agent={agent} onAddToCart={handleAddToCart} index={index} />
             </li>
           ))}
         </ul>
